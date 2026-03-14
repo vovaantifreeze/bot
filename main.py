@@ -48,13 +48,13 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # START
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
+    username = update.effective_user.username
     cursor.execute("SELECT * FROM users WHERE telegram_id=?", (user_id,))
     user = cursor.fetchone()
     if user:
         await update.message.reply_text("Deja ai acces.")
     else:
         await update.message.reply_text(
-            username = update.effective_user.username
             f"Pentru a continua trebuie sa platiti suma de 150 lei [APASAND AICI](https://mia-qr.bnm.md/1/m/BNM/AGRe6b17ca4125e415eb6d912b73ffbd45d)\n\nLa achitare, in rubrica \"notite\" sau \"descriere\" introduceti user-ul dvs. {username}\n\nDupa achitare, veti primi un cod cu care veti avea acces la restul serviciului",
             parse_mode="Markdown"
         )
