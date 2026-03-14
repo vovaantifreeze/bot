@@ -55,7 +55,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Deja ai acces.")
     else:
         await update.message.reply_text(
-            f"Pentru a continua trebuie sa platiti suma de 150 lei [APASAND AICI](https://mia-qr.bnm.md/1/m/BNM/AGRe6b17ca4125e415eb6d912b73ffbd45d)\n\nLa achitare, in rubrica \"notite\" sau \"descriere\" introduceti user-ul dvs. {username}\n\nDupa achitare, veti primi un cod cu care veti avea acces la restul serviciului",
+            f"Pentru a continua trebuie sa platiti suma de 150 lei [APASAND AICI](https://mia-qr.bnm.md/1/m/BNM/AGRe6b17ca4125e415eb6d912b73ffbd45d)\n\nLa achitare, in rubrica \"notite\" sau \"descriere\" introduceti user-ul dvs. ({username})\n\nDupa achitare, veti primi un cod cu care veti avea acces la restul serviciului",
             parse_mode="Markdown"
         )
 
