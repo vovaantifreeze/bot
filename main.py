@@ -188,7 +188,7 @@ async def check_code(update: Update, context: ContextTypes.DEFAULT_TYPE):
         user = cursor.fetchone()
         if user:
             await update.message.reply_text(
-                "Mesajul primit. Dacă dorești să începi configurarea, apasă /configurare."
+                "Mesajul a fost primit si va fi revizuit de o persoana fizica. \n Dacă dorești să începi configurarea, apasă /configurare."
             )
         else:
             await update.message.reply_text("Cod invalid sau folosit.")
