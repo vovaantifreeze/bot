@@ -163,7 +163,7 @@ async def configurare(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "In caz de neclaritati, puteti viziona acest video demonstrativ."
     )
 
-    video_url = "https://drive.google.com/uc?export=download&id=1ULs-9fEw2erDFT8X4I-6KuXpmC3_BMpx"
+    video_url = "https://drive.google.com/uc?export=download&id=1hwIXrMvc7IQQsO_65D00kxujWFsK53h3"
 
     await update.message.reply_video(video=video_url, caption=mesaj, parse_mode="Markdown")
 
