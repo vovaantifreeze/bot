@@ -74,19 +74,30 @@ async def check_code(update: Update, context: ContextTypes.DEFAULT_TYPE):
         cursor.execute("SELECT * FROM users WHERE telegram_id=?", (user_id,))
         user = cursor.fetchone()
         if user:
-            await update.message.reply_text("Command received.")
+            await update.message.reply_text("Mesajul primit, daca doresti sa incepi configurarea incearca /start sau /configurare.")
         else:
             await update.message.reply_text("Cod invalid sau folosit.")
 
-# SECRET COMMAND
-async def secret(update: Update, context: ContextTypes.DEFAULT_TYPE):
+# COMANDA CONFIGURARE CU VIDEO
+async def configurare(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
+
+    # verificare acces
     cursor.execute("SELECT * FROM users WHERE telegram_id=?", (user_id,))
     user = cursor.fetchone()
     if not user:
-        await update.message.reply_text("Access respins.")
+        await update.message.reply_text("Acces respins. Nu ai cod valid.")
         return
-    await update.message.reply_text("Secret command executed.")
+
+    mesaj = (
+        "Acceseaza programarile tale [AICI](https://eservicii.gov.md/asp/dimtcca/APO/my-appointments) sau pe link-ul transmis de ASP pe posta electronica \n Introdu datele tale si apasa pe buton de \"EDITARE\" pentru programarea dorita \n Copiaza link-ul pe care esti redirectionat si trimitel aici \n \n"
+        "In caz de neclaritati, puteti viziona acest video demonstrativ."
+    )
+
+    # video online
+    video_url = "https://drive.google.com/uc?export=download&id=1ULs-9fEw2erDFT8X4I-6KuXpmC3_BMpx"  # sau fișier local
+
+    await update.message.reply_video(video=video_url, caption=mesaj)
 
 # CODE MANAGEMENT
 async def code(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -120,7 +131,7 @@ async def adduser(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = int(context.args[0])
     cursor.execute("INSERT OR IGNORE INTO users(telegram_id) VALUES(?)", (user_id,))
     conn.commit()
-    await update.message.reply_text(f"User {user_id} a primit acces.")
+    await update.message.reply_text(f"User {user_id} a primit acces. Foloseste comanda /configurare pentru a continua")
 
 async def deluser(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id != ADMIN_ID:
@@ -167,7 +178,7 @@ app.add_handler(CommandHandler("listcodes", listcodes))
 app.add_handler(CommandHandler("code", code))
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("generate", generate))
-app.add_handler(CommandHandler("secret", secret))
+app.add_handler(CommandHandler("configurare", configurare))
 app.add_handler(MessageHandler(filters.TEXT, check_code))
 
 # RUN BOT
