@@ -153,12 +153,12 @@ async def configurare(update: Update, context: ContextTypes.DEFAULT_TYPE):
     cursor.execute("SELECT * FROM users WHERE telegram_id=?", (user_id,))
     user = cursor.fetchone()
     if not user:
-        await update.message.reply_text("Acces respins. Nu ai cod valid.")
+        await update.message.reply_text("Acces respins. Nu ai cod valid. Foloseste /start pentru a incepe")
         return
 
     mesaj = (
-        "Acceseaza programarile tale [AICI](https://eservicii.gov.md/asp/dimtcca/APO/my-appointments)\n"
-        "Introdu datele tale si apasa pe buton de 'EDITARE' pentru programarea dorita.\n"
+        "Acceseaza programarile tale [AICI](https://eservicii.gov.md/asp/dimtcca/APO/my-appointments) sau pe link-ul oferit de asp pe posta elctronica\n"
+        "Introdu datele tale si apasa pe butonul de 'EDITARE' pentru programarea dorita.\n"
         "Copiaza link-ul pe care esti redirectionat si trimite-l aici.\n\n"
         "In caz de neclaritati, puteti viziona acest video demonstrativ."
     )
